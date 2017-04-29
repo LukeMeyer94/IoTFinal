@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        text = (TextView) findViewById(R.id.main_message);
 //        mStorageRef = FirebaseStorage.getInstance().getReference();
         setContentView(R.layout.activity_main);
         mDataRef = FirebaseDatabase.getInstance().getReference();
@@ -77,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
     public void testFunction(View view){
         EditText e = (EditText)findViewById(R.id.editText1);
         String userEmail = e.getText().toString();
-        mDataRef.child("users").push().setValue(userEmail);
+        String userID = randomString();
+        DatabaseReference userDBRef = mDataRef.child("users/" + userID);
+        userDBRef.child("email").setValue(userEmail);
+        userDBRef.child("status").setValue("Pending");
+        DatabaseReference locks = userDBRef.child("locks");
+        locks.child("Lock 1").setValue("true");
+    }
+
+    private String randomString() {
+        SecureRandom r = new SecureRandom();
+        return new BigInteger(130,r).toString(32);
     }
 }

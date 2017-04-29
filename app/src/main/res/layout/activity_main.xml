@@ -6,26 +6,19 @@
     android:layout_height="match_parent"
     tools:context="team6.iot.uiowa.edu.iotandroid.MainActivity">
 
-    <TextView
-        android:id="@+id/main_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter email of user you would like to authorize"
-        tools:layout_editor_absoluteY="265dp"
-        tools:layout_editor_absoluteX="85dp" />
+        android:inputType="textEmailAddress"
+        android:text="Enter new user email"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -34,7 +27,54 @@
         android:layout_below="@id/editText1"
         android:text="Add new user"
         android:onClick="testFunction"
-        tools:layout_editor_absoluteY="308dp"
-        tools:layout_editor_absoluteX="130dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="344dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        app:layout_constraintGuide_begin="241dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="241dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin view: Add user"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline3"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="message "
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
