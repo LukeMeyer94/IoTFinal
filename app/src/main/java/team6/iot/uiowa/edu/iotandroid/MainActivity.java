@@ -1,18 +1,15 @@
-package team6.iot.uiowa.edu.iotfinal;
+package team6.iot.uiowa.edu.iotandroid;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,21 +18,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
+    private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     private static final String TAG = "AnonAuth";
+    private TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        text = (TextView) findViewById(R.id.main_message);
+//        mStorageRef = FirebaseStorage.getInstance().getReference();
         setContentView(R.layout.activity_main);
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -68,40 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void testFunction(View view){
-        mDataRef.push().setValue("test");
+    private void updateUI(FirebaseUser f){
 
-//        System.out.println(byteRef);
-//        UploadTask uploadTask = byteRef.putBytes(bytes);
-//        while(uploadTask.isInProgress()){
-//            System.out.println("waiting...");
-//        }
-//        System.out.println(uploadTask.isSuccessful());
-
-
-
-        System.out.println("BUTTON PRESSED");
     }
 
-    private void updateUI(FirebaseUser user) {
-//        hideProgressDialog();
-//
-//        TextView idView = (TextView) findViewById(R.id.anonymous_status_id);
-//        TextView emailView = (TextView) findViewById(R.id.anonymous_status_email);
-//        boolean isSignedIn = (user != null);
-//
-//        // Status text
-//        if (isSignedIn) {
-//            idView.setText(getString(R.string.id_fmt, user.getUid()));
-//            emailView.setText(getString(R.string.email_fmt, user.getEmail()));
-//        } else {
-//            idView.setText(R.string.signed_out);
-//            emailView.setText(null);
-//        }
-//
-//        // Button visibility
-//        findViewById(R.id.button_anonymous_sign_in).setEnabled(!isSignedIn);
-//        findViewById(R.id.button_anonymous_sign_out).setEnabled(isSignedIn);
-//        findViewById(R.id.button_link_account).setEnabled(isSignedIn);
+    public void testFunction(View view){
+        EditText e = (EditText)findViewById(R.id.editText1);
+        String userEmail = e.getText().toString();
+        mDataRef.child("users").push().setValue(userEmail);
     }
 }

@@ -1,4 +1,4 @@
-package team6.iot.uiowa.edu.iotfinal;
+package team6.iot.uiowa.edu.iotandroid;
 
 import org.junit.Test;
 

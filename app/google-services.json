@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892605412335:android:83a2762400acf6de",
+        "android_client_info": {
+          "package_name": "team6.iot.uiowa.edu.iotandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892605412335-2c6kn6258573oik8d20kirplq26fe8lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "team6.iot.uiowa.edu.iotandroid",
+            "certificate_hash": "7ad84031cd9197fa2ac08a86745879c2d32c75a9"
+          }
+        },
+        {
+          "client_id": "892605412335-4tf9ucheg5qi2ac53141jt4afbrecka9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF8BrZUtjmxpWh6GFI0LqJ2Vh4Pplv0KQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892605412335-4tf9ucheg5qi2ac53141jt4afbrecka9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -1,4 +1,4 @@
-package team6.iot.uiowa.edu.iotfinal;
+package team6.iot.uiowa.edu.iotandroid;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("team6.iot.uiowa.edu.iotfinal", appContext.getPackageName());
+        assertEquals("team6.iot.uiowa.edu.iotandroid", appContext.getPackageName());
     }
 }
