@@ -1,5 +1,6 @@
 package team6.iot.uiowa.edu.iotandroid;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.math.BigInteger;
@@ -87,5 +87,9 @@ public class MainActivity extends AppCompatActivity {
     private String randomString() {
         SecureRandom r = new SecureRandom();
         return new BigInteger(130,r).toString(32);
+    }
+    public void goToBeam(android.view.View v){
+        Intent beamIntent = new Intent(MainActivity.this,Beam.class);
+        startActivity(beamIntent);
     }
 }

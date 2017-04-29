@@ -77,4 +77,13 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beam"
+        android:onClick="goToBeam"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="298dp" />
+
 </android.support.constraint.ConstraintLayout>
