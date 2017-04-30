@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             status.setTextColor(Color.GREEN);
             status.setText("User validated!");
             emailEntry.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+            mDataRef.child("users");
             return;
         } else{
             status.setTextColor(Color.RED);
@@ -65,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             emailEntry.setText("Login as a verified user to add new users");
         }
 
+    }
+
+    private boolean checkEmailValid( String email ) {
+        String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(emailPattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
 
     private void getAllUsers () {
@@ -121,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
         if(userEmails.contains(userEmail)){
             status.setTextColor(Color.RED);
             status.setText("User already added, try again");
+            emailEntry.setText("");
+            emailEntry.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+            return;
+        }
+        if(!checkEmailValid(userEmail)){
+            status.setTextColor(Color.RED);
+            status.setText("Invalid email, try again");
             emailEntry.setText("");
             emailEntry.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             return;
