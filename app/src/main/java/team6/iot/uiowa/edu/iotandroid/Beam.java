@@ -37,7 +37,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback {
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        String text = ("key="+key);
+        String text = (User.userEmail);
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[] { createTextRecord("",text)
                         /**
