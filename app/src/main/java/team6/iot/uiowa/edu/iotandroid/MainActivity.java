@@ -39,9 +39,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        User.userEmail = "test";
+        checkForUser();
 
     }
+
+    private void checkForUser () {
+        if(User.userEmail == null){
+            Intent signInIntent = new Intent(MainActivity.this,GSignIn.class);
+            startActivity(signInIntent);
+        }
+        return;
+    }
+
 
     @Override
     public void onStart() {
@@ -49,30 +58,6 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
-        signInAnon();
-    }
-
-    private void signInAnon () {
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-
-                        // ...
-                    }
-                });
     }
 
     private void updateUI(FirebaseUser f){
@@ -80,16 +65,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testFunction(View view){
-//        EditText e = (EditText)findViewById(R.id.editText1);
-//        String userEmail = e.getText().toString();
-//        String userID = randomString();
-//        DatabaseReference userDBRef = mDataRef.child("users/" + userID);
-//        userDBRef.child("email").setValue(userEmail);
-//        userDBRef.child("status").setValue("Pending");
-//        DatabaseReference locks = userDBRef.child("locks");
-//        locks.child("Lock 1").setValue("true");
-        Intent signInIntent = new Intent(MainActivity.this,GSignIn.class);
-        startActivity(signInIntent);
+        EditText e = (EditText)findViewById(R.id.editText1);
+        String userEmail = e.getText().toString();
+        String userID = randomString();
+        DatabaseReference userDBRef = mDataRef.child("users/" + userID);
+        userDBRef.child("email").setValue(userEmail);
+        userDBRef.child("status").setValue("Pending");
+        DatabaseReference locks = userDBRef.child("locks");
+        locks.child("Lock 1").setValue("true");
     }
 
     private String randomString() {
