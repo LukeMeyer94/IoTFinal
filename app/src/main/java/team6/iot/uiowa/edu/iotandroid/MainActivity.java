@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,24 +37,25 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
-    private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
-    private static final String TAG = "AnonAuth";
     private TextView header;
     private TextView status;
     private User user;
     private List<String> userEmails;
     private EditText emailEntry;
+    private Button addUserButton;
+    private Button beamButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mStorageRef = FirebaseStorage.getInstance().getReference();
         setContentView(R.layout.activity_main);
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         header = (TextView) findViewById(R.id.header);
         status = (TextView) findViewById(R.id.textView2);
         emailEntry = (EditText)findViewById(R.id.editText1);
+        addUserButton = (Button) findViewById(R.id.button);
+        beamButton = (Button) findViewById(R.id.button2);
         checkForUser();
         userEmails = new ArrayList<>();
         getAllUsers();
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         } else{
             status.setTextColor(Color.RED);
             status.setText("User not validated");
+            addUserButton.setEnabled(false);
+            beamButton.setEnabled(false);
+            emailEntry.setEnabled(false);
+            emailEntry.setText("Login as a verified user to add new users");
         }
 
     }
