@@ -17,6 +17,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="Enter new user email"
+        android:textColorHint="@android:color/white"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
