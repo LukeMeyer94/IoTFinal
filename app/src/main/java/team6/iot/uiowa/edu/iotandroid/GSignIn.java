@@ -75,6 +75,7 @@ public class GSignIn extends FragmentActivity implements View.OnClickListener, G
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            User.userEmail = acct.getEmail();
             updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
