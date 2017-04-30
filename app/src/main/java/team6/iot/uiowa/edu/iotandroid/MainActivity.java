@@ -24,13 +24,15 @@ import com.google.firebase.storage.StorageReference;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
     private static final String TAG = "AnonAuth";
-    private TextView text;
+    private TextView header;
     private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mDataRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        header = (TextView) findViewById(R.id.header);
         checkForUser();
-
+        header.setText("Welcome " + User.userName);
     }
 
     private void checkForUser () {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void testFunction(View view){
+    public void addUser(View view){
         EditText e = (EditText)findViewById(R.id.editText1);
         String userEmail = e.getText().toString();
         String userID = randomString();

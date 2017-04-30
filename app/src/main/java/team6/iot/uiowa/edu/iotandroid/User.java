@@ -8,6 +8,6 @@ import android.app.Application;
 
 public class User {
 
-    public static String userEmail;
+    public static String userEmail, userName;
 
 }
