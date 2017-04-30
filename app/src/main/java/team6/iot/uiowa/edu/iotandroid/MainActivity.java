@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         addUserToDB(userEmail);
         status.setTextColor(Color.GREEN);
         status.setText("User added!");
+        emailEntry.setText("");
+        emailEntry.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
     }
 
     private void addUserToDB(String email){
