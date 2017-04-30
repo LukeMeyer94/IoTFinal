@@ -77,14 +77,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testFunction(View view){
-        EditText e = (EditText)findViewById(R.id.editText1);
-        String userEmail = e.getText().toString();
-        String userID = randomString();
-        DatabaseReference userDBRef = mDataRef.child("users/" + userID);
-        userDBRef.child("email").setValue(userEmail);
-        userDBRef.child("status").setValue("Pending");
-        DatabaseReference locks = userDBRef.child("locks");
-        locks.child("Lock 1").setValue("true");
+//        EditText e = (EditText)findViewById(R.id.editText1);
+//        String userEmail = e.getText().toString();
+//        String userID = randomString();
+//        DatabaseReference userDBRef = mDataRef.child("users/" + userID);
+//        userDBRef.child("email").setValue(userEmail);
+//        userDBRef.child("status").setValue("Pending");
+//        DatabaseReference locks = userDBRef.child("locks");
+//        locks.child("Lock 1").setValue("true");
+        Intent signInIntent = new Intent(MainActivity.this,GSignIn.class);
+        startActivity(signInIntent);
     }
 
     private String randomString() {

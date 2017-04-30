@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -18,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Created by lukemeyer on 4/30/17.
  */
 
-public class GSignIn extends FragmentActivity implements View.OnClickListener {
+public class GSignIn extends FragmentActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleSignInOptions gso;
     private GoogleApiClient gac;
@@ -29,7 +31,7 @@ public class GSignIn extends FragmentActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_gsignin);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -38,7 +40,7 @@ public class GSignIn extends FragmentActivity implements View.OnClickListener {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        mStatusTextView = (TextView) findViewById(R.id.textView3);
+        mStatusTextView = (TextView) findViewById(R.id.status);
     }
 
     @Override
@@ -91,6 +93,13 @@ public class GSignIn extends FragmentActivity implements View.OnClickListener {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
 }
