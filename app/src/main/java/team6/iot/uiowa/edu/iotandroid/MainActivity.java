@@ -64,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
                 Iterator i = dataSnapshot.getChildren().iterator();
                 while(i.hasNext()){
                     DataSnapshot d = (DataSnapshot) i.next();
-                    userEmails.add(d.child("email").getValue().toString());
+                    String e = d.child("email").getValue().toString();
+                    if(!userEmails.contains(e)){
+                        userEmails.add(e);
+                    }
                 }
             }
 
