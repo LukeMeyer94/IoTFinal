@@ -52,9 +52,21 @@ public class MainActivity extends AppCompatActivity {
         header = (TextView) findViewById(R.id.header);
         status = (TextView) findViewById(R.id.textView2);
         checkForUser();
-        header.setText("Welcome " + User.userName);
         userEmails = new ArrayList<>();
         getAllUsers();
+        header.setText("Welcome " + User.userName);
+    }
+
+    private void validateUser() {
+        if(userEmails.contains(User.userEmail)){
+            status.setTextColor(Color.GREEN);
+            status.setText("User validated!");
+            return;
+        } else{
+            status.setTextColor(Color.RED);
+            status.setText("User not validated");
+        }
+
     }
 
     private void getAllUsers () {
@@ -66,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     DataSnapshot d = (DataSnapshot) i.next();
                     String e = d.child("email").getValue().toString();
                     if(!userEmails.contains(e)){
+                        System.out.println("adding " + e + " to user email list");
                         userEmails.add(e);
                     }
                 }
+                validateUser();
             }
 
             @Override
@@ -121,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         String userID = randomString();
         DatabaseReference userDBRef = mDataRef.child("users/" + userID);
         userDBRef.child("email").setValue(email);
-        userDBRef.child("status").setValue("Pending");
         DatabaseReference locks = userDBRef.child("locks");
         locks.child("Lock 1").setValue("true");
     }
