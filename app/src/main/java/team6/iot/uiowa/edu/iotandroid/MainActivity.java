@@ -108,9 +108,15 @@ public class MainActivity extends AppCompatActivity {
             e.setText("");
             return;
         }
+        addUserToDB(userEmail);
+        status.setTextColor(Color.GREEN);
+        status.setText("User added!");
+    }
+
+    private void addUserToDB(String email){
         String userID = randomString();
         DatabaseReference userDBRef = mDataRef.child("users/" + userID);
-        userDBRef.child("email").setValue(userEmail);
+        userDBRef.child("email").setValue(email);
         userDBRef.child("status").setValue("Pending");
         DatabaseReference locks = userDBRef.child("locks");
         locks.child("Lock 1").setValue("true");
