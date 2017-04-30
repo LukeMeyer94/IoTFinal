@@ -2,6 +2,7 @@ package team6.iot.uiowa.edu.iotandroid;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     private User user;
     private List<String> userEmails;
+    private EditText emailEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         header = (TextView) findViewById(R.id.header);
         status = (TextView) findViewById(R.id.textView2);
+        emailEntry = (EditText)findViewById(R.id.editText1);
         checkForUser();
         userEmails = new ArrayList<>();
         getAllUsers();
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         if(userEmails.contains(User.userEmail)){
             status.setTextColor(Color.GREEN);
             status.setText("User validated!");
+            emailEntry.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
             return;
         } else{
             status.setTextColor(Color.RED);
@@ -117,13 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addUser(View view){
         System.out.println(userEmails);
-        EditText e = (EditText)findViewById(R.id.editText1);
-        String userEmail = e.getText().toString();
+//        EditText e = (EditText)findViewById(R.id.editText1);
+        String userEmail = emailEntry.getText().toString();
 
         if(userEmails.contains(userEmail)){
             status.setTextColor(Color.RED);
             status.setText("User already added, try again");
-            e.setText("");
+            emailEntry.setText("");
+            emailEntry.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             return;
         }
         addUserToDB(userEmail);
