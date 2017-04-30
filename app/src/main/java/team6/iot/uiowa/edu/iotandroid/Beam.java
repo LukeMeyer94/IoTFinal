@@ -9,6 +9,7 @@ import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +83,12 @@ public class Beam extends Activity implements CreateNdefMessageCallback {
     }
     public void setKey(android.view.View v){
         key = key+1;
+    }
+
+    public void returnToMain(View v) {
+        Intent goToHome = new Intent(Beam.this,MainActivity.class);
+        startActivity(goToHome);
+        this.finish();
     }
 
 }

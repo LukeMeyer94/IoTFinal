@@ -89,6 +89,7 @@ public class GSignIn extends FragmentActivity implements View.OnClickListener, G
         if (signedIn) {
             Intent goToHome = new Intent(GSignIn.this,MainActivity.class);
             startActivity(goToHome);
+            this.finish();
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {

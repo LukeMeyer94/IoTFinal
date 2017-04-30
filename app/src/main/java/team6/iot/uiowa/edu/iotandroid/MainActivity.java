@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if(User.userEmail == null){
             Intent signInIntent = new Intent(MainActivity.this,GSignIn.class);
             startActivity(signInIntent);
+            this.finish();
         }
         return;
     }
@@ -129,5 +130,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToBeam(android.view.View v){
         Intent beamIntent = new Intent(MainActivity.this,Beam.class);
         startActivity(beamIntent);
+        this.finish();
     }
 }
