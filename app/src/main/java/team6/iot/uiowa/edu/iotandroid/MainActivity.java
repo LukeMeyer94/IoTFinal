@@ -22,7 +22,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import com.firebase.ui.database.FirebaseListAdapter;
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private FirebaseAuth mAuth;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText emailEntry;
     private Button addUserButton;
     private Button beamButton;
+    FirebaseListAdapter<Log> myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
         userEmails = new ArrayList<>();
         getAllUsers();
         header.setText("Welcome " + User.userName);
+        myAdapter = new FirebaseListAdapter<Log>(this,Log.class,R.layout.log_layout,
+                mDataRef.child("logs")) {
+            @Override
+            protected void populateView(android.view.View v, Log model, int position) {
+                TextView lockId = (TextView)v.findViewById(R.id.lockId);
+                TextView time = (TextView)v.findViewById(R.id.time);
+                TextView user = (TextView)v.findViewById(R.id.user);
+
+                //Set text
+                lockId.setText("Lock: " + model.getLockId());
+                time.setText("Time: $" + Double.toString(model.getTime()));
+                user.setText("User: " + model.getUser());
+
+            }
+
+        };
     }
 
     private void validateUser() {
