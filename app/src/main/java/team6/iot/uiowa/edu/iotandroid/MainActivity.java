@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             status.setTextColor(Color.GREEN);
             status.setText("User validated!");
             emailEntry.getBackground().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
-            mDataRef.child("users");
             return;
         } else{
             status.setTextColor(Color.RED);
