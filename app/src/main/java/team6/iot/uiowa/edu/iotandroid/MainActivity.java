@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,9 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
+import com.firebase.ui.database.FirebaseListAdapter;
 public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDataRef;
     private FirebaseAuth mAuth;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText emailEntry;
     private Button addUserButton;
     private Button beamButton;
+    private ListView logList;
+    FirebaseListAdapter<Log> myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +49,31 @@ public class MainActivity extends AppCompatActivity {
         emailEntry = (EditText)findViewById(R.id.editText1);
         addUserButton = (Button) findViewById(R.id.button);
         beamButton = (Button) findViewById(R.id.button2);
+        logList = (ListView) findViewById(R.id.LogList);
         checkForUser();
         userEmails = new ArrayList<>();
         getAllUsers();
         header.setText("Welcome " + User.userName);
+        myAdapter = new FirebaseListAdapter<Log>(this,Log.class,R.layout.log_layout,
+                mDataRef.child("logs")) {
+            @Override
+            protected void populateView(android.view.View v, Log model, int position) {
+                TextView lockId = (TextView)v.findViewById(R.id.lockId);
+                TextView time = (TextView)v.findViewById(R.id.time);
+                TextView user = (TextView)v.findViewById(R.id.user);
+                TextView success = (TextView)v.findViewById(R.id.success);
+                Date timeVal =  new Date(Math.round(model.getTime())*1000);
+
+                //Set text
+                lockId.setText("Lock: " + model.getLockId());
+                time.setText("Time: " + timeVal);
+                user.setText("User: " + model.getUser());
+                success.setText("Success: " + model.getHasAccess());
+
+            }
+
+        };
+        logList.setAdapter(myAdapter);
     }
 
     private void validateUser() {
