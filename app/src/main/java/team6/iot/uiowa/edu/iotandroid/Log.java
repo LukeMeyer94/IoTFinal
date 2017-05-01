@@ -15,6 +15,9 @@ public class Log {
         this.time = time;
         this.user = user;
     }
+    public Log(){
+
+    }
 
     public String getUser() {
         return user;
